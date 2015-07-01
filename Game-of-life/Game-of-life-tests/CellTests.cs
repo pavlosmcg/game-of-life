@@ -44,16 +44,5 @@ namespace Game_of_life_tests
 
             Assert.AreEqual(State.Alive, cell.GetNextState());
         }
-
-        [Test]
-        public void TickMethodKillsLoneCells()
-        {
-            var cell = new Cell(State.Alive);
-            var world = new World(new List<Cell> {cell});
-
-            world.Tick();
-
-            Assert.AreEqual(State.Dead, cell.State);
-        }
     }
 }
