@@ -21,19 +21,13 @@ namespace Game_of_life
 
         public State GetNextState()
         {
-            var liveNeighbourCount = _neighbours.Count(x => x.State == State.Alive);
-            if (State == State.Alive)
-            {
-                switch (liveNeighbourCount)
-                {
-                    case 2:
-                    case 3:
-                        return State.Alive;
-                }
-            }
+            var liveNeighbours = _neighbours.Count(x => x.State == State.Alive);
 
-            if (liveNeighbourCount == 3)
+            if (liveNeighbours == 3)
                 return State.Alive;
+
+            if (liveNeighbours == 2)
+                return State;
 
             return State.Dead;
         }
