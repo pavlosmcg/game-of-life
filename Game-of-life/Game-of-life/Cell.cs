@@ -7,12 +7,12 @@ namespace Game_of_life
     {
         private IList<Cell> _neighbours = new List<Cell>();
 
+        public State State { get; set; }
+
         public Cell(State state)
         {
             State = state;
         }
-
-        public State State { get; set; }
 
         public void AddNeighbours(params Cell[] neighbours)
         {

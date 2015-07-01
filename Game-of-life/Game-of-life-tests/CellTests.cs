@@ -31,9 +31,27 @@ namespace Game_of_life_tests
         public void ACellWithTwoAliveNeighboursShouldStayAlive()
         {
             var cell = new Cell(State.Alive);
+            cell.AddNeighbours(new Cell(State.Alive), new Cell(State.Alive));
+
+            Assert.AreEqual(State.Alive, cell.GetNextState());
+        }
+
+        [Test]
+        public void ACellWithThreeAliveNeighboursShouldStayAlive()
+        {
+            var cell = new Cell(State.Alive);
             cell.AddNeighbours(new Cell(State.Alive), new Cell(State.Alive), new Cell(State.Alive));
 
             Assert.AreEqual(State.Alive, cell.GetNextState());
+        }
+
+        [Test]
+        public void ACellWithFourAliveNeighboursShouldDie()
+        {
+            var cell = new Cell(State.Alive);
+            cell.AddNeighbours(new Cell(State.Alive), new Cell(State.Alive), new Cell(State.Alive), new Cell(State.Alive));
+
+            Assert.AreEqual(State.Dead, cell.GetNextState());
         }
 
         [Test]
@@ -43,6 +61,24 @@ namespace Game_of_life_tests
             cell.AddNeighbours(new Cell(State.Alive), new Cell(State.Alive), new Cell(State.Alive));
 
             Assert.AreEqual(State.Alive, cell.GetNextState());
+        }
+
+        [Test]
+        public void ADeadCellWithFewerThanThreeAliveNeighboursShouldStayDead()
+        {
+            var cell = new Cell(State.Dead);
+            cell.AddNeighbours(new Cell(State.Alive), new Cell(State.Alive), new Cell(State.Dead));
+
+            Assert.AreEqual(State.Dead, cell.GetNextState());
+        }
+
+        [Test]
+        public void ADeadCellWithMoreThanThreeAliveNeighboursShouldStayDead()
+        {
+            var cell = new Cell(State.Dead);
+            cell.AddNeighbours(new Cell(State.Alive), new Cell(State.Alive), new Cell(State.Alive), new Cell(State.Alive));
+
+            Assert.AreEqual(State.Dead, cell.GetNextState());
         }
     }
 }
